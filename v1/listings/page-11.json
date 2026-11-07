@@ -1,0 +1,1108 @@
+{
+ "@odata.context": "https://garniebolling-maia.github.io/realtor-dot-com/v1/$metadata#Property",
+ "@odata.count": 5050,
+ "page": 11,
+ "pageSize": 500,
+ "value": [
+  {
+   "ListingId": "LST0003427",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1003427",
+   "PropertyId": "PROP00017",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Multi-Family",
+   "ListPrice": 2422000,
+   "BedroomsTotal": 6,
+   "BathroomsTotal": 2,
+   "LivingArea": 3863,
+   "ListingContractDate": "2025-01-03T01:17:00Z",
+   "ModificationTimestamp": "2025-02-07T01:17:00Z",
+   "Address": {
+    "City": "Boston",
+    "StateOrProvince": "MA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001085",
+    "OfficeId": "ACC00178"
+   }
+  },
+  {
+   "ListingId": "LST0000821",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1000821",
+   "PropertyId": "PROP00204",
+   "StandardStatus": "Active",
+   "PropertyType": "Single Family",
+   "ListPrice": 1992000,
+   "BedroomsTotal": 6,
+   "BathroomsTotal": 5,
+   "LivingArea": 603,
+   "ListingContractDate": "2026-09-01T01:49:00Z",
+   "ModificationTimestamp": "2026-09-04T01:49:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001860",
+    "OfficeId": "ACC00161"
+   }
+  },
+  {
+   "ListingId": "LST0001093",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1001093",
+   "PropertyId": "PROP00430",
+   "StandardStatus": "Coming Soon",
+   "PropertyType": "Land",
+   "ListPrice": 1712000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 4,
+   "LivingArea": 4596,
+   "ListingContractDate": "2026-04-08T03:21:00Z",
+   "ModificationTimestamp": "2026-06-05T03:21:00Z",
+   "Address": {
+    "City": "Tampa",
+    "StateOrProvince": "FL"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001584",
+    "OfficeId": "ACC00118"
+   }
+  },
+  {
+   "ListingId": "LST0000221",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1000221",
+   "PropertyId": "PROP00144",
+   "StandardStatus": "Sold",
+   "PropertyType": "Land",
+   "ListPrice": 1211000,
+   "BedroomsTotal": 6,
+   "BathroomsTotal": 4,
+   "LivingArea": 2898,
+   "ListingContractDate": "2026-08-28T08:37:00Z",
+   "ModificationTimestamp": "2026-09-20T08:37:00Z",
+   "Address": {
+    "City": "Seattle",
+    "StateOrProvince": "WA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001719",
+    "OfficeId": "ACC00104"
+   }
+  },
+  {
+   "ListingId": "LST0003572",
+   "MlsId": "MLS_MOUNTAIN",
+   "MlsListingNumber": "MT-1003572",
+   "PropertyId": "PROP00054",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Single Family",
+   "ListPrice": 1637000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 2,
+   "LivingArea": 2370,
+   "ListingContractDate": "2025-04-18T14:09:00Z",
+   "ModificationTimestamp": "2025-05-25T14:09:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001261",
+    "OfficeId": "ACC00157"
+   }
+  },
+  {
+   "ListingId": "LST0003746",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1003746",
+   "PropertyId": "PROP00033",
+   "StandardStatus": "Active",
+   "PropertyType": "Multi-Family",
+   "ListPrice": 1407000,
+   "BedroomsTotal": 3,
+   "BathroomsTotal": 2,
+   "LivingArea": 4556,
+   "ListingContractDate": "2026-09-04T06:58:00Z",
+   "ModificationTimestamp": "2026-09-30T06:58:00Z",
+   "Address": {
+    "City": "Seattle",
+    "StateOrProvince": "WA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000187",
+    "OfficeId": "ACC00258"
+   }
+  },
+  {
+   "ListingId": "LST0000474",
+   "MlsId": "MLS_MOUNTAIN",
+   "MlsListingNumber": "MT-1000474",
+   "PropertyId": "PROP00286",
+   "StandardStatus": "Sold",
+   "PropertyType": "Single Family",
+   "ListPrice": 900000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 3,
+   "LivingArea": 3184,
+   "ListingContractDate": "2025-05-16T05:38:00Z",
+   "ModificationTimestamp": "2025-06-12T05:38:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000828",
+    "OfficeId": "ACC00153"
+   }
+  },
+  {
+   "ListingId": "LST0000232",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1000232",
+   "PropertyId": "PROP00020",
+   "StandardStatus": "Sold",
+   "PropertyType": "Land",
+   "ListPrice": 269000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 2,
+   "LivingArea": 4695,
+   "ListingContractDate": "2026-09-19T14:16:00Z",
+   "ModificationTimestamp": "2026-10-24T14:16:00Z",
+   "Address": {
+    "City": "Charlotte",
+    "StateOrProvince": "NC"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001357",
+    "OfficeId": "ACC00097"
+   }
+  },
+  {
+   "ListingId": "LST0000165",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1000165",
+   "PropertyId": "PROP00123",
+   "StandardStatus": "Pending",
+   "PropertyType": "Single Family",
+   "ListPrice": 161000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 3,
+   "LivingArea": 1037,
+   "ListingContractDate": "2024-12-29T06:09:00Z",
+   "ModificationTimestamp": "2024-12-30T06:09:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001390",
+    "OfficeId": "ACC00224"
+   }
+  },
+  {
+   "ListingId": "LST0004870",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1004870",
+   "PropertyId": "PROP00406",
+   "StandardStatus": "Sold",
+   "PropertyType": "Single Family",
+   "ListPrice": 2006000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 4,
+   "LivingArea": 3552,
+   "ListingContractDate": "2025-12-21T06:04:00Z",
+   "ModificationTimestamp": "2026-01-26T06:04:00Z",
+   "Address": {
+    "City": "Charlotte",
+    "StateOrProvince": "NC"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001045",
+    "OfficeId": "ACC00126"
+   }
+  },
+  {
+   "ListingId": "LST0000620",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1000620",
+   "PropertyId": "PROP00358",
+   "StandardStatus": "Pending",
+   "PropertyType": "Townhouse",
+   "ListPrice": 2075000,
+   "BedroomsTotal": 5,
+   "BathroomsTotal": 2,
+   "LivingArea": 2265,
+   "ListingContractDate": "2025-01-24T23:59:00Z",
+   "ModificationTimestamp": "2025-02-04T23:59:00Z",
+   "Address": {
+    "City": "Tampa",
+    "StateOrProvince": "FL"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000489",
+    "OfficeId": "ACC00292"
+   }
+  },
+  {
+   "ListingId": "LST0000978",
+   "MlsId": "MLS_MOUNTAIN",
+   "MlsListingNumber": "MT-1000978",
+   "PropertyId": "PROP00089",
+   "StandardStatus": "Active",
+   "PropertyType": "Single Family",
+   "ListPrice": 1357000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 3,
+   "LivingArea": 3439,
+   "ListingContractDate": "2025-05-02T06:15:00Z",
+   "ModificationTimestamp": "2025-05-11T06:15:00Z",
+   "Address": {
+    "City": "Columbus",
+    "StateOrProvince": "OH"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000934",
+    "OfficeId": "ACC00271"
+   }
+  },
+  {
+   "ListingId": "LST0000261",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1000261",
+   "PropertyId": "PROP00014",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Single Family",
+   "ListPrice": 2078000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 2,
+   "LivingArea": 3820,
+   "ListingContractDate": "2025-05-02T14:59:00Z",
+   "ModificationTimestamp": "2025-05-04T14:59:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000796",
+    "OfficeId": "ACC00073"
+   }
+  },
+  {
+   "ListingId": "LST0001788",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1001788",
+   "PropertyId": "PROP00080",
+   "StandardStatus": "Active",
+   "PropertyType": "Land",
+   "ListPrice": 1310000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 1,
+   "LivingArea": 2993,
+   "ListingContractDate": "2026-02-22T19:23:00Z",
+   "ModificationTimestamp": "2026-04-06T19:23:00Z",
+   "Address": {
+    "City": "Austin",
+    "StateOrProvince": "TX"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000189",
+    "OfficeId": "ACC00106"
+   }
+  },
+  {
+   "ListingId": "LST0001356",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1001356",
+   "PropertyId": "PROP00071",
+   "StandardStatus": "Sold",
+   "PropertyType": "Condo",
+   "ListPrice": 2140000,
+   "BedroomsTotal": 6,
+   "BathroomsTotal": 3,
+   "LivingArea": 2536,
+   "ListingContractDate": "2026-02-27T02:17:00Z",
+   "ModificationTimestamp": "2026-03-21T02:17:00Z",
+   "Address": {
+    "City": "Seattle",
+    "StateOrProvince": "WA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000202",
+    "OfficeId": "ACC00035"
+   }
+  },
+  {
+   "ListingId": "LST0001507",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1001507",
+   "PropertyId": "PROP00494",
+   "StandardStatus": "Sold",
+   "PropertyType": "Condo",
+   "ListPrice": 1429000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 2,
+   "LivingArea": 2138,
+   "ListingContractDate": "2025-10-08T06:02:00Z",
+   "ModificationTimestamp": "2025-10-14T06:02:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001227",
+    "OfficeId": "ACC00293"
+   }
+  },
+  {
+   "ListingId": "LST0004028",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1004028",
+   "PropertyId": "PROP00048",
+   "StandardStatus": "Active",
+   "PropertyType": "Townhouse",
+   "ListPrice": 320000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 3,
+   "LivingArea": 3627,
+   "ListingContractDate": "2025-03-18T03:00:00Z",
+   "ModificationTimestamp": "2025-04-27T03:00:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000499",
+    "OfficeId": "ACC00136"
+   }
+  },
+  {
+   "ListingId": "LST0001041",
+   "MlsId": "MLS_MOUNTAIN",
+   "MlsListingNumber": "MT-1001041",
+   "PropertyId": "PROP00043",
+   "StandardStatus": "Sold",
+   "PropertyType": "Multi-Family",
+   "ListPrice": 482000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 5,
+   "LivingArea": 4928,
+   "ListingContractDate": "2025-09-17T12:24:00Z",
+   "ModificationTimestamp": "2025-11-08T12:24:00Z",
+   "Address": {
+    "City": "Austin",
+    "StateOrProvince": "TX"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001810",
+    "OfficeId": "ACC00125"
+   }
+  },
+  {
+   "ListingId": "LST0000206",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1000206",
+   "PropertyId": "PROP00338",
+   "StandardStatus": "Active",
+   "PropertyType": "Townhouse",
+   "ListPrice": 616000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 4,
+   "LivingArea": 1218,
+   "ListingContractDate": "2025-05-15T22:30:00Z",
+   "ModificationTimestamp": "2025-06-25T22:30:00Z",
+   "Address": {
+    "City": "Phoenix",
+    "StateOrProvince": "AZ"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000899",
+    "OfficeId": "ACC00083"
+   }
+  },
+  {
+   "ListingId": "LST0001050",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1001050",
+   "PropertyId": "PROP_ORPHAN_99999",
+   "StandardStatus": "Active",
+   "PropertyType": "Townhouse",
+   "ListPrice": 404000,
+   "BedroomsTotal": 5,
+   "BathroomsTotal": 5,
+   "LivingArea": 2664,
+   "ListingContractDate": "2026-02-25T19:10:00Z",
+   "ModificationTimestamp": "2026-04-25T19:10:00Z",
+   "Address": {
+    "City": "Nashville",
+    "StateOrProvince": "TN"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001973",
+    "OfficeId": "ACC00072"
+   }
+  },
+  {
+   "ListingId": "LST0003182",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1003182",
+   "PropertyId": "PROP00384",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Townhouse",
+   "ListPrice": 1585000,
+   "BedroomsTotal": 5,
+   "BathroomsTotal": 4,
+   "LivingArea": 3558,
+   "ListingContractDate": "2025-03-11T11:49:00Z",
+   "ModificationTimestamp": "2025-05-04T11:49:00Z",
+   "Address": {
+    "City": "Columbus",
+    "StateOrProvince": "OH"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000652",
+    "OfficeId": "ACC00068"
+   }
+  },
+  {
+   "ListingId": "LST0002463",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1002463",
+   "PropertyId": "PROP00376",
+   "StandardStatus": "Pending",
+   "PropertyType": "Land",
+   "ListPrice": 778000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 3,
+   "LivingArea": 4263,
+   "ListingContractDate": "2025-02-06T13:17:00Z",
+   "ModificationTimestamp": "2025-02-14T13:17:00Z",
+   "Address": {
+    "City": "Phoenix",
+    "StateOrProvince": "AZ"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000269",
+    "OfficeId": "ACC00213"
+   }
+  },
+  {
+   "ListingId": "LST0004228",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1004228",
+   "PropertyId": "PROP00371",
+   "StandardStatus": "Active",
+   "PropertyType": "Condo",
+   "ListPrice": 1345000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 2,
+   "LivingArea": 1697,
+   "ListingContractDate": "2025-10-23T09:41:00Z",
+   "ModificationTimestamp": "2025-10-30T09:41:00Z",
+   "Address": {
+    "City": "Phoenix",
+    "StateOrProvince": "AZ"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001981",
+    "OfficeId": "ACC00167"
+   }
+  },
+  {
+   "ListingId": "LST0004874",
+   "MlsId": "MLS_MOUNTAIN",
+   "MlsListingNumber": "MT-1004874",
+   "PropertyId": "PROP00361",
+   "StandardStatus": "Sold",
+   "PropertyType": "Single Family",
+   "ListPrice": 502000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 5,
+   "LivingArea": 2400,
+   "ListingContractDate": "2026-02-03T06:40:00Z",
+   "ModificationTimestamp": "2026-02-17T06:40:00Z",
+   "Address": {
+    "City": "Tampa",
+    "StateOrProvince": "FL"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001308",
+    "OfficeId": "ACC00071"
+   }
+  },
+  {
+   "ListingId": "LST0001741",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1001741",
+   "PropertyId": "PROP00180",
+   "StandardStatus": "Sold",
+   "PropertyType": "Land",
+   "ListPrice": 1263000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 2,
+   "LivingArea": 2681,
+   "ListingContractDate": "2025-05-21T22:34:00Z",
+   "ModificationTimestamp": "2025-06-04T22:34:00Z",
+   "Address": {
+    "City": "Nashville",
+    "StateOrProvince": "TN"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000522",
+    "OfficeId": "ACC00009"
+   }
+  },
+  {
+   "ListingId": "LST0002786",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1002786",
+   "PropertyId": "PROP00293",
+   "StandardStatus": "Active",
+   "PropertyType": "Townhouse",
+   "ListPrice": 608000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 4,
+   "LivingArea": 1353,
+   "ListingContractDate": "2026-07-11T06:48:00Z",
+   "ModificationTimestamp": "2026-08-05T06:48:00Z",
+   "Address": {
+    "City": "Seattle",
+    "StateOrProvince": "WA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000965",
+    "OfficeId": "ACC00212"
+   }
+  },
+  {
+   "ListingId": "LST0003699",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1003699",
+   "PropertyId": "PROP00483",
+   "StandardStatus": "Coming Soon",
+   "PropertyType": "Land",
+   "ListPrice": 1312000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 3,
+   "LivingArea": 3905,
+   "ListingContractDate": "2026-10-23T13:45:00Z",
+   "ModificationTimestamp": "2026-11-04T00:00:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001262",
+    "OfficeId": "ACC00189"
+   }
+  },
+  {
+   "ListingId": "LST0003886",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1003886",
+   "PropertyId": "PROP00394",
+   "StandardStatus": "Active",
+   "PropertyType": "Townhouse",
+   "ListPrice": 2105000,
+   "BedroomsTotal": 6,
+   "BathroomsTotal": 5,
+   "LivingArea": 3292,
+   "ListingContractDate": "2025-06-24T03:51:00Z",
+   "ModificationTimestamp": "2025-07-09T03:51:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000181",
+    "OfficeId": "ACC00197"
+   }
+  },
+  {
+   "ListingId": "LST0004299",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1004299",
+   "PropertyId": "PROP00265",
+   "StandardStatus": "Active",
+   "PropertyType": "Land",
+   "ListPrice": 2133000,
+   "BedroomsTotal": 4,
+   "BathroomsTotal": 1,
+   "LivingArea": 3020,
+   "ListingContractDate": "2025-06-15T02:17:00Z",
+   "ModificationTimestamp": "2025-07-13T02:17:00Z",
+   "Address": {
+    "City": "Charlotte",
+    "StateOrProvince": "NC"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000002",
+    "OfficeId": "ACC00023"
+   }
+  },
+  {
+   "ListingId": "LST0001666",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1001666",
+   "PropertyId": "PROP00224",
+   "StandardStatus": "Active",
+   "PropertyType": "Condo",
+   "ListPrice": 1126000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 3,
+   "LivingArea": 788,
+   "ListingContractDate": "2026-10-05T04:00:00Z",
+   "ModificationTimestamp": "2026-11-04T13:00:00Z",
+   "Address": {
+    "City": "Columbus",
+    "StateOrProvince": "OH"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000898",
+    "OfficeId": "ACC00270"
+   }
+  },
+  {
+   "ListingId": "LST0002513",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1002513",
+   "PropertyId": "PROP00470",
+   "StandardStatus": "Sold",
+   "PropertyType": "Condo",
+   "ListPrice": 1118000,
+   "BedroomsTotal": 6,
+   "BathroomsTotal": 2,
+   "LivingArea": 799,
+   "ListingContractDate": "2025-08-18T18:13:00Z",
+   "ModificationTimestamp": "2025-09-06T18:13:00Z",
+   "Address": {
+    "City": "Nashville",
+    "StateOrProvince": "TN"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001861",
+    "OfficeId": "ACC00262"
+   }
+  },
+  {
+   "ListingId": "LST0003376",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1003376",
+   "PropertyId": "PROP00403",
+   "StandardStatus": "Coming Soon",
+   "PropertyType": "Single Family",
+   "ListPrice": 157000,
+   "BedroomsTotal": 5,
+   "BathroomsTotal": 1,
+   "LivingArea": 3863,
+   "ListingContractDate": "2025-06-17T21:44:00Z",
+   "ModificationTimestamp": "2025-06-26T21:44:00Z",
+   "Address": {
+    "City": "Tampa",
+    "StateOrProvince": "FL"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000846",
+    "OfficeId": "ACC00289"
+   }
+  },
+  {
+   "ListingId": "LST0004830",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1004830",
+   "PropertyId": "PROP00257",
+   "StandardStatus": "Pending",
+   "PropertyType": "Townhouse",
+   "ListPrice": 1782000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 3,
+   "LivingArea": 4076,
+   "ListingContractDate": "2025-09-22T09:57:00Z",
+   "ModificationTimestamp": "2025-10-29T09:57:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000072",
+    "OfficeId": "ACC00160"
+   }
+  },
+  {
+   "ListingId": "LST0001638",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1001638",
+   "PropertyId": "PROP00253",
+   "StandardStatus": "Active",
+   "PropertyType": "Land",
+   "ListPrice": 836000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 5,
+   "LivingArea": 1696,
+   "ListingContractDate": "2025-06-11T06:33:00Z",
+   "ModificationTimestamp": "2025-06-19T06:33:00Z",
+   "Address": {
+    "City": "Boston",
+    "StateOrProvince": "MA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000300",
+    "OfficeId": "ACC00030"
+   }
+  },
+  {
+   "ListingId": "LST0003464",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1003464",
+   "PropertyId": "PROP00146",
+   "StandardStatus": "Pending",
+   "PropertyType": "Multi-Family",
+   "ListPrice": 1203000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 1,
+   "LivingArea": 3955,
+   "ListingContractDate": "2026-03-07T01:25:00Z",
+   "ModificationTimestamp": "2026-04-28T01:25:00Z",
+   "Address": {
+    "City": "Boston",
+    "StateOrProvince": "MA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000729",
+    "OfficeId": "ACC00098"
+   }
+  },
+  {
+   "ListingId": "LST0002959",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1002959",
+   "PropertyId": "PROP00163",
+   "StandardStatus": "Expired",
+   "PropertyType": "Multi-Family",
+   "ListPrice": 2116000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 4,
+   "LivingArea": 649,
+   "ListingContractDate": "2024-12-30T23:26:00Z",
+   "ModificationTimestamp": "2025-01-20T23:26:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000089",
+    "OfficeId": "ACC00005"
+   }
+  },
+  {
+   "ListingId": "LST0000712",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1000712",
+   "PropertyId": "PROP00412",
+   "StandardStatus": "Active",
+   "PropertyType": "Townhouse",
+   "ListPrice": 583000,
+   "BedroomsTotal": 3,
+   "BathroomsTotal": 3,
+   "LivingArea": 4515,
+   "ListingContractDate": "2025-02-24T04:48:00Z",
+   "ModificationTimestamp": "2025-04-05T04:48:00Z",
+   "Address": {
+    "City": "Seattle",
+    "StateOrProvince": "WA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000775",
+    "OfficeId": "ACC00042"
+   }
+  },
+  {
+   "ListingId": "LST0000328",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1000328",
+   "PropertyId": "PROP00183",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Single Family",
+   "ListPrice": 1553000,
+   "BedroomsTotal": 3,
+   "BathroomsTotal": 1,
+   "LivingArea": 4258,
+   "ListingContractDate": "2025-01-26T14:38:00Z",
+   "ModificationTimestamp": "2025-03-22T14:38:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001238",
+    "OfficeId": "ACC00270"
+   }
+  },
+  {
+   "ListingId": "LST0001825",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1001825",
+   "PropertyId": "PROP00269",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Single Family",
+   "ListPrice": 866000,
+   "BedroomsTotal": 5,
+   "BathroomsTotal": 4,
+   "LivingArea": 1946,
+   "ListingContractDate": "2026-07-11T14:35:00Z",
+   "ModificationTimestamp": "2026-08-23T14:35:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000063",
+    "OfficeId": "ACC00070"
+   }
+  },
+  {
+   "ListingId": "LST0003449",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1003449",
+   "PropertyId": "PROP00045",
+   "StandardStatus": "Expired",
+   "PropertyType": "Single Family",
+   "ListPrice": 893000,
+   "BedroomsTotal": 3,
+   "BathroomsTotal": 5,
+   "LivingArea": 3749,
+   "ListingContractDate": "2026-02-14T05:34:00Z",
+   "ModificationTimestamp": "2026-03-17T05:34:00Z",
+   "Address": {
+    "City": "Seattle",
+    "StateOrProvince": "WA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001648",
+    "OfficeId": "ACC00106"
+   }
+  },
+  {
+   "ListingId": "LST0003173",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1003173",
+   "PropertyId": "PROP00474",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Land",
+   "ListPrice": 1233000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 4,
+   "LivingArea": 4293,
+   "ListingContractDate": "2026-05-15T00:06:00Z",
+   "ModificationTimestamp": "2026-07-01T00:06:00Z",
+   "Address": {
+    "City": "Phoenix",
+    "StateOrProvince": "AZ"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001203",
+    "OfficeId": "ACC00225"
+   }
+  },
+  {
+   "ListingId": "LST0004980",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1004980",
+   "PropertyId": "PROP00126",
+   "StandardStatus": "Coming Soon",
+   "PropertyType": "Land",
+   "ListPrice": 242000,
+   "BedroomsTotal": 3,
+   "BathroomsTotal": 3,
+   "LivingArea": 4898,
+   "ListingContractDate": "2026-06-20T17:14:00Z",
+   "ModificationTimestamp": "2026-08-16T17:14:00Z",
+   "Address": {
+    "City": "Denver",
+    "StateOrProvince": "CO"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000846",
+    "OfficeId": "ACC00048"
+   }
+  },
+  {
+   "ListingId": "LST0003596",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1003596",
+   "PropertyId": "PROP00300",
+   "StandardStatus": "Coming Soon",
+   "PropertyType": "Single Family",
+   "ListPrice": 2182000,
+   "BedroomsTotal": 3,
+   "BathroomsTotal": 5,
+   "LivingArea": 3219,
+   "ListingContractDate": "2026-06-28T01:25:00Z",
+   "ModificationTimestamp": "2026-08-16T01:25:00Z",
+   "Address": {
+    "City": "Boston",
+    "StateOrProvince": "MA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001988",
+    "OfficeId": "ACC00070"
+   }
+  },
+  {
+   "ListingId": "LST0004456",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1004456",
+   "PropertyId": "PROP00415",
+   "StandardStatus": "Active",
+   "PropertyType": "Condo",
+   "ListPrice": 1393000,
+   "BedroomsTotal": 3,
+   "BathroomsTotal": 2,
+   "LivingArea": 3297,
+   "ListingContractDate": "2025-06-21T03:49:00Z",
+   "ModificationTimestamp": "2025-07-10T03:49:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001446",
+    "OfficeId": "ACC00127"
+   }
+  },
+  {
+   "ListingId": "LST0004743",
+   "MlsId": "MLS_MOUNTAIN",
+   "MlsListingNumber": "MT-1004743",
+   "PropertyId": "PROP00263",
+   "StandardStatus": "Expired",
+   "PropertyType": "Condo",
+   "ListPrice": 1297000,
+   "BedroomsTotal": 6,
+   "BathroomsTotal": 4,
+   "LivingArea": 1618,
+   "ListingContractDate": "2026-05-19T12:01:00Z",
+   "ModificationTimestamp": "2026-06-28T12:01:00Z",
+   "Address": {
+    "City": "Phoenix",
+    "StateOrProvince": "AZ"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000488",
+    "OfficeId": "ACC00015"
+   }
+  },
+  {
+   "ListingId": "LST0002956",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1002956",
+   "PropertyId": "PROP00062",
+   "StandardStatus": "Active",
+   "PropertyType": "Single Family",
+   "ListPrice": 561000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 2,
+   "LivingArea": 1603,
+   "ListingContractDate": "2025-08-16T19:58:00Z",
+   "ModificationTimestamp": "2025-10-05T19:58:00Z",
+   "Address": {
+    "City": "Columbus",
+    "StateOrProvince": "OH"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000095",
+    "OfficeId": "ACC00086"
+   }
+  },
+  {
+   "ListingId": "LST0001820",
+   "MlsId": "MLS_MIDWEST",
+   "MlsListingNumber": "MW-1001820",
+   "PropertyId": "PROP00368",
+   "StandardStatus": "Sold",
+   "PropertyType": "Multi-Family",
+   "ListPrice": 1622000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 2,
+   "LivingArea": 3937,
+   "ListingContractDate": "2026-05-10T13:53:00Z",
+   "ModificationTimestamp": "2026-06-12T13:53:00Z",
+   "Address": {
+    "City": "Austin",
+    "StateOrProvince": "TX"
+   },
+   "ListAgent": {
+    "AgentId": "AGT000431",
+    "OfficeId": "ACC00238"
+   }
+  },
+  {
+   "ListingId": "LST0000988",
+   "MlsId": "MLS_NORTHEAST",
+   "MlsListingNumber": "NE-1000988",
+   "PropertyId": "PROP_ORPHAN_99999",
+   "StandardStatus": "Withdrawn",
+   "PropertyType": "Multi-Family",
+   "ListPrice": 2225000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 1,
+   "LivingArea": 1302,
+   "ListingContractDate": "2025-12-21T23:28:00Z",
+   "ModificationTimestamp": "2026-02-05T23:28:00Z",
+   "Address": {
+    "City": "Tampa",
+    "StateOrProvince": "FL"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001918",
+    "OfficeId": "ACC00127"
+   }
+  },
+  {
+   "ListingId": "LST0000691",
+   "MlsId": "MLS_GULF",
+   "MlsListingNumber": "GF-1000691",
+   "PropertyId": "PROP00325",
+   "StandardStatus": "Pending",
+   "PropertyType": "Land",
+   "ListPrice": 1835000,
+   "BedroomsTotal": 2,
+   "BathroomsTotal": 3,
+   "LivingArea": 2361,
+   "ListingContractDate": "2026-07-25T11:31:00Z",
+   "ModificationTimestamp": "2026-08-31T11:31:00Z",
+   "Address": {
+    "City": "Charlotte",
+    "StateOrProvince": "NC"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001709",
+    "OfficeId": "ACC00187"
+   }
+  },
+  {
+   "ListingId": "LST0002552",
+   "MlsId": "MLS_PACIFIC",
+   "MlsListingNumber": "PC-1002552",
+   "PropertyId": "PROP00437",
+   "StandardStatus": "Coming Soon",
+   "PropertyType": "Single Family",
+   "ListPrice": 1838000,
+   "BedroomsTotal": 1,
+   "BathroomsTotal": 1,
+   "LivingArea": 3755,
+   "ListingContractDate": "2025-06-08T11:57:00Z",
+   "ModificationTimestamp": "2025-06-13T11:57:00Z",
+   "Address": {
+    "City": "Atlanta",
+    "StateOrProvince": "GA"
+   },
+   "ListAgent": {
+    "AgentId": "AGT001262",
+    "OfficeId": "ACC00239"
+   }
+  }
+ ]
+}
