@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: REA MLS Listings API
+  version: "1.0"
+  description: RESO-style, read-only, public REST API returning MLS property listings as JSON. No authentication. Next-link pagination via @odata.nextLink (absolute URL).
+servers:
+  - url: https://YOUR_GITHUB_USER.github.io/rea-mls-api
+security: []
+paths:
+  /v1/listings/page-{pageNumber}.json:
+    get:
+      operationId: getListings
+      summary: Get a page of property listings
+      description: Returns up to 500 listings. Follow @odata.nextLink until it is absent or null. Start with pageNumber=1.
+      parameters:
+        - name: pageNumber
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+      responses:
+        "200":
+          description: A page of listings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingPage"
+components:
+  schemas:
+    ListingPage:
+      type: object
+      properties:
+        "@odata.context":
+          type: string
+        "@odata.count":
+          type: integer
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        value:
+          type: array
+          items:
+            $ref: "#/components/schemas/Listing"
+        "@odata.nextLink":
+          type: string
+          nullable: true
+          description: Absolute URL of the next page; absent on the last page.
+    Listing:
+      type: object
+      properties:
+        ListingId: { type: string }
+        MlsId: { type: string }
+        MlsListingNumber: { type: string }
+        PropertyId: { type: string }
+        StandardStatus:
+          type: string
+          enum: [Active, Pending, Sold, Expired, Withdrawn, Coming Soon]
+        PropertyType: { type: string }
+        ListPrice: { type: number, nullable: true }
+        BedroomsTotal: { type: integer }
+        BathroomsTotal: { type: integer }
+        LivingArea: { type: integer }
+        ListingContractDate: { type: string, format: date-time }
+        ModificationTimestamp: { type: string, format: date-time }
+        Address:
+          type: object
+          properties:
+            City: { type: string }
+            StateOrProvince: { type: string }
+        ListAgent:
+          type: object
+          properties:
+            AgentId: { type: string }
+            OfficeId: { type: string }
