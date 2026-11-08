@@ -168,7 +168,7 @@ footer{margin-top:56px;padding:26px 0 40px;border-top:1px solid var(--line);font
     <div class="card"><div class="stat">~3 min</div><div class="statcap">live fix segment in the demo</div></div>
   </div>
   <div class="callout honest"><strong class="t">Honest positioning</strong>
-    Custom connectors do <strong>not</strong> heal themselves when the source changes. Here, Matillion detects the drift through an explicit data quality rule and assert, explains it, and Maia proposes the fix. A person reviews, commits and publishes. Compare that with silent, unpredictable behaviour in Fivetran.
+    Custom connectors do <strong>not</strong> heal themselves when the source changes. Here, Matillion detects the drift through an explicit data quality rule and assert, explains it, and Maia proposes the fix. A person reviews, commits and publishes. Compare that with silent, unpredictable behavior in other tools.
   </div>
 </section>
 
@@ -226,7 +226,7 @@ v1/listings/*.json    LIVE payload (what the connector calls)</code></pre>
         </tbody>
       </table></div></li>
   </ol>
-  <div class="callout lesson"><strong class="t">Lesson learned</strong>
+  <div class="callout lesson"><strong class="t">Lesson Learned with the assist from Maia</strong>
     <code>@odata.nextLink</code> only loaded page 1, probably because the connector treats the <code>.</code> as a JSON path separator. Adding a plain <code>nextLink</code> key fixed it: 11 pages and 5,050 records.
   </div>
 </section>
