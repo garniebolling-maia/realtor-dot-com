@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MLS Schema Drift Demo Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold-900:#4D3400; --gold-700:#9A6700; --gold-500:#FFC000; --gold-100:#FFF2CC;
+  --teal-900:#002E2B; --teal-700:#00524E; --teal-500:#477A75; --teal-400:#87C7C0; --teal-200:#CFE9E6; --teal-50:#E7F4F2;
+  --grey-700:#4D4D4D; --grey-200:#E1E1E1; --grey-100:#F0F0F0;
+  --blue-500:#007CA5; --cream:#FFFAE9;
+  --display:'Source Serif 4',Georgia,serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --bg:var(--cream); --text:var(--teal-900); --card:#fff; --line:var(--grey-200);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#001F1D; --text:#E7F4F2; --card:#002E2B; --line:#1F5C57; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* hero */
+.hero{background:var(--teal-700);color:#fff;padding:36px 0 56px;background-image:radial-gradient(900px 400px at 100% 100%,var(--teal-900),transparent 70%)}
+.hero img.logo{height:34px;display:block;margin-bottom:44px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--teal-200);margin:0 0 10px}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(30px,5vw,48px);line-height:1.15;margin:0;color:#E7F4F2}
+.hero h1 strong{display:block;font-family:var(--body);font-weight:800;color:var(--gold-500);font-size:clamp(26px,4.4vw,42px);margin-top:4px}
+.hero p.lede{max-width:760px;margin:22px 0 0;font-size:18px;color:#E7F4F2;font-family:var(--display);font-weight:300}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:30px}
+.meta div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:12px 16px}
+.meta dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-200);font-weight:600}
+.meta dd{margin:2px 0 0;font-size:14px;color:#fff;word-break:break-word}
+.meta code{background:none;color:var(--gold-500);padding:0}
+
+/* nav */
+nav.toc{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+nav.toc a{white-space:nowrap;text-decoration:none;font-size:13px;font-weight:600;border:1px solid var(--teal-500);border-radius:999px;padding:5px 14px;color:var(--text)}
+nav.toc a:hover{background:var(--gold-500);border-color:var(--gold-500);color:var(--teal-900)}
+
+/* sections */
+section{padding:44px 0 8px}
+h2{font-family:var(--display);font-weight:300;font-size:clamp(26px,3.6vw,34px);margin:0 0 6px;color:var(--teal-700)}
+@media (prefers-color-scheme: dark){ h2{color:var(--teal-200)} }
+h2 .n{font-family:var(--body);font-weight:800;color:var(--gold-700);margin-right:10px;font-size:.7em}
+@media (prefers-color-scheme: dark){ h2 .n{color:var(--gold-500)} }
+h3{font-family:var(--body);font-weight:700;font-size:18px;margin:30px 0 8px}
+p{margin:0 0 12px}
+.sub{color:var(--grey-700);margin-bottom:18px}
+@media (prefers-color-scheme: dark){ .sub{color:var(--teal-200)} }
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin:14px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:14px 0}
+.cards .card{margin:0}
+.card h4{margin:0 0 6px;font-size:15px}
+.stat{font-family:var(--display);font-size:38px;font-weight:300;color:var(--teal-700);line-height:1.1}
+@media (prefers-color-scheme: dark){ .stat{color:var(--gold-500)} }
+.statcap{font-size:13px;color:var(--grey-700)}
+@media (prefers-color-scheme: dark){ .statcap{color:var(--teal-200)} }
+
+.callout{border-radius:20px;padding:18px 22px;margin:18px 0}
+.callout.honest{background:var(--gold-100);color:var(--gold-900);border:1px solid var(--gold-500)}
+.callout.warn{background:var(--teal-50);color:var(--teal-900);border:1px solid var(--teal-400)}
+.callout.lesson{background:var(--teal-50);color:var(--teal-900);border:1px solid var(--teal-400)}
+.callout strong.t{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:16px;margin:12px 0;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{background:var(--teal-700);color:#fff;text-align:left;padding:10px 14px;font-weight:600}
+td{padding:9px 14px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--teal-50)}
+@media (prefers-color-scheme: dark){ tbody tr:nth-child(even) td{background:#003B37} }
+td:first-child{font-weight:600}
+
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--teal-50);color:var(--teal-900);padding:1px 6px;border-radius:6px;word-break:break-word}
+@media (prefers-color-scheme: dark){ code{background:#003B37;color:var(--teal-50)} }
+pre{background:var(--teal-900);color:#E7F4F2;border-radius:16px;padding:16px 18px;overflow-x:auto;font-size:13px;line-height:1.55;margin:12px 0}
+pre code{background:none;color:inherit;padding:0;word-break:normal}
+ol.steps pre{white-space:pre-wrap}
+ol.steps pre code{white-space:pre-wrap}
+pre .c{color:var(--teal-400)}
+
+/* flow */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}
+.flow .step{background:var(--teal-700);color:#fff;border-radius:999px;padding:7px 16px;font-size:13px;font-weight:600}
+.flow .step.fail{background:var(--gold-500);color:var(--teal-900)}
+.flow .arrow{color:var(--teal-500);font-weight:700}
+
+.tag{display:inline-block;border-radius:999px;padding:2px 10px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle}
+.tag.break{background:var(--gold-500);color:var(--teal-900)}
+.tag.add{background:var(--teal-200);color:var(--teal-900)}
+.tag.ok{background:#5EF0A0;color:var(--teal-900)}
+.tag.bad{background:var(--gold-500);color:var(--teal-900)}
+
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:12px 0}
+ol.steps>li{counter-increment:s;position:relative;padding:12px 16px 12px 56px;background:var(--card);border:1px solid var(--line);border-radius:16px;margin:8px 0}
+ol.steps>li::before{content:counter(s);position:absolute;left:14px;top:11px;width:30px;height:30px;border-radius:50%;background:var(--teal-700);color:#fff;font-weight:700;display:grid;place-items:center;font-size:14px}
+ol.steps ul{margin:6px 0 0;padding-left:20px}
+
+footer{margin-top:56px;padding:26px 0 40px;border-top:1px solid var(--line);font-size:13px;color:var(--grey-700)}
+@media (prefers-color-scheme: dark){ footer{color:var(--teal-200)} }
+@media print{ nav.toc{display:none} .hero{-webkit-print-color-adjust:exact;print-color-adjust:exact} section{break-inside:avoid-page} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" alt="Maia by Matillion" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTE4LjI3IDI0Ni45NSI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQtNSk7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQtNik7CiAgICAgIH0KCiAgICAgIC5jbHMtMyB7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQtNCk7CiAgICAgIH0KCiAgICAgIC5jbHMtNCB7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQtMyk7CiAgICAgIH0KCiAgICAgIC5jbHMtNSB7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQtMik7CiAgICAgIH0KCiAgICAgIC5jbHMtNiB7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQpOwogICAgICB9CgogICAgICAuY2xzLTcgewogICAgICAgIGZpbGw6ICNiN2RkZDk7CiAgICAgIH0KCiAgICAgIC5jbHMtOCB7CiAgICAgICAgZmlsbDogI2ZmZjsKICAgICAgfQogICAgPC9zdHlsZT4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibGluZWFyLWdyYWRpZW50IiB4MT0iMTAxLjA3IiB5MT0iMjM2LjY2IiB4Mj0iMTcyLjMxIiB5Mj0iMjkxLjkzIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMjc0Ljk2KSBzY2FsZSgxIC0xKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9Ii4zMyIgc3RvcC1jb2xvcj0iI2ZmZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9Ii40MSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuOTgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuOTIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjgzIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iLjcyIiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii43Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iLjc4IiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii42Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQtMiIgeDE9Ii0xNy40NiIgeTE9IjIyNS41OSIgeDI9IjY5LjEzIiB5Mj0iMjkwLjM4IiB4bGluazpocmVmPSIjbGluZWFyLWdyYWRpZW50Ii8+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudC0zIiB4MT0iODYuNTQiIHkxPSI3Ni40NiIgeDI9IjE2Ny44OSIgeTI9IjE2MC4zMyIgeGxpbms6aHJlZj0iI2xpbmVhci1ncmFkaWVudCIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQtNCIgeDE9IjE3LjE1IiB5MT0iMTUxLjI4IiB4Mj0iNzciIHkyPSIyMTEuNTQiIHhsaW5rOmhyZWY9IiNsaW5lYXItZ3JhZGllbnQiLz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibGluZWFyLWdyYWRpZW50LTUiIHgxPSI2NS44MSIgeTE9IjE2NC41IiB4Mj0iMTE3LjIzIiB5Mj0iMjI2LjAzIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMjc0Ljk2KSBzY2FsZSgxIC0xKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMTMiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjk4Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iLjI4IiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii45MiIvPgogICAgICA8c3RvcCBvZmZzZXQ9Ii40NCIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuODMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNzIiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjYiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudC02IiB4MT0iLTQ1LjU0IiB5MT0iOTE1NS41MiIgeDI9IjE2OS4xMiIgeTI9Ijg5NTMuOTYiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtODkzMS4wNjAxKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNhNzYyMjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMDkiIHN0b3AtY29sb3I9IiNiZTc4MjIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMjIiIHN0b3AtY29sb3I9IiNkODkxMWMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuMzUiIHN0b3AtY29sb3I9IiNlYmEyMTkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNDkiIHN0b3AtY29sb3I9IiNmNmFkMTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNjMiIHN0b3AtY29sb3I9IiNmYWIxMTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZlY2JlIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8Zz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik0yMTguMTcsMjI4LjE3Yy0xLjUyLDAtMi44MS0uMjgtMy44MS0uODYtMS4wNC0uNTgtMS44Ny0xLjI5LTIuNTEtMi4xNXMtMS4xMi0xLjY4LTEuNDUtMi41MWgtLjMzdjQuOTVoLTIuOTl2LTM1LjIyaDMuMDd2MTMuODhoLjI1Yy4zMy0uNzkuODMtMS42MiwxLjQ0LTIuNDQuNjMtLjgzLDEuNDUtMS41NCwyLjQ4LTIuMTFzMi4zMS0uODYsMy44OC0uODZjMi4xLDAsMy45LjU4LDUuNDYsMS43LDEuNTcsMS4xMiwyLjc3LDIuNzIsMy42NSw0Ljc5czEuMzIsNC40MiwxLjMyLDcuMTgtLjQ1LDUuMTMtMS4zMiw3LjItMi4xLDMuNjUtMy42NSw0LjgtMy4zOCwxLjctNS40NiwxLjd2LS4wOGwtLjAyLjAyWk0yMTcuNzksMjI1LjI2YzEuNjgsMCwzLjA3LS40Niw0LjIxLTEuNDQsMS4xNi0uOTYsMi4wMS0yLjI2LDIuNjEtMy45LjYxLTEuNjUuOTEtMy40Ny45MS01LjVzLS4zLTMuODEtLjg4LTUuNDUtMS40NS0yLjg5LTIuNjEtMy44NS0yLjU2LTEuNDQtNC4yMy0xLjQ0LTMuMDIuNDYtNC4xOCwxLjM3LTIuMDEsMi4xOC0yLjYxLDMuOGMtLjYxLDEuNi0uOTEsMy40Ny0uOTEsNS41NXMuMywzLjk2LjkxLDUuNTgsMS40OSwyLjkxLDIuNjQsMy44NWMxLjE2Ljk0LDIuNTMsMS40LDQuMTQsMS40aDBsLS4wMi4wMloiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy03IiBkPSJNMjMyLjIzLDIzNy4xM2wuODYtMi43Ny4zNi4xMmMuOTEuMjgsMS43LjM2LDIuNDQuMjUuNzQtLjEyLDEuNC0uNSwyLjAxLTEuMTYuNTgtLjY2LDEuMTEtMS42LDEuNTItMi44NmwuOTktMi44OS05Ljc2LTI2LjYzaDMuMzVsNS44NiwxNi42MWMuNTQsMS41MiwxLjAyLDMuMDIsMS40NCw0LjUxcy44MywyLjk0LDEuMjQsNC4zOWgtMS4xMWMuNDUtMS40NC44OC0yLjkxLDEuMjktNC4zOXMuODgtMi45OSwxLjQ0LTQuNDdsNS44OC0xNi42MWgzLjM1bC0xMS4yOCwzMC43M2MtLjUsMS4zMi0xLjA3LDIuMzktMS43MywzLjI0cy0xLjQ0LDEuNDktMi4zMSwxLjktMS44NS42My0yLjkxLjYzYy0uNjMsMC0xLjE5LS4wNS0xLjctLjE3cy0uOTQtLjI1LTEuMjQtLjM4bC4wMy0uMDNoLS4wM1oiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik0zMjUuMzYsMTk1LjJsLTIwLjU5LTExLjg3Yy0yLjY2LTEuNTQtNS45Ni0xLjU0LTguNjMsMGwtMjAuNTksMTEuODdjLTIuNjYsMS41NC00LjMxLDQuMzktNC4zMSw3LjQ4djIzLjc3YzAsMy4wNywxLjY1LDUuOTQsNC4zMSw3LjQ4bDIwLjU5LDExLjg3YzIuNjYsMS41NCw1Ljk2LDEuNTQsOC42MywwbDIwLjU5LTExLjg3YzIuNjYtMS41NCw0LjMxLTQuMzksNC4zMS03LjQ4di0yMy43N2MwLTMuMDctMS42NS01Ljk0LTQuMzEtNy40OFpNMjgwLjg0LDIyOS4wNmMtLjg2LDAtMS43My0uMy0yLjQ0LS45MS0xLjU3LTEuMzUtMS43My0zLjcxLS4zOC01LjI4bDE5LjY1LTIyLjY4YzEuMzUtMS41NywzLjcxLTEuNzMsNS4yNS0uMzgsMS41NywxLjM1LDEuNzMsMy43MS4zOCw1LjI1bC0xOS42NSwyMi42OGMtLjc0Ljg2LTEuNzgsMS4yOS0yLjgyLDEuMjloMGwuMDMuMDNoLS4wMlpNMzIyLjU2LDIyOC4xN2MtLjcxLjYxLTEuNTcuOTEtMi40My45MS0xLjA0LDAtMi4xLS40NS0yLjgyLTEuMjlsLTkuMzktMTEtOS4zOSwxMWMtLjc0Ljg2LTEuNzgsMS4yOS0yLjgyLDEuMjktLjg2LDAtMS43My0uMy0yLjQzLS45MS0xLjU3LTEuMzUtMS43Ny0zLjY4LS40MS01LjI1bDEyLjE1LTE0LjIycy4wNS0uMDguMTItLjEybC4yNS0uMjVzLjAzLS4wMy4wNS0uMDVjLjA4LS4wOC4yLS4xNy4zLS4yNWgwcy4xMi0uMDguMTctLjEyLjEyLS4wOC4xNy0uMTJoMGMuMTctLjA4LjM2LS4yLjUzLS4yNS4wNSwwLC4xMy0uMDUuMi0uMDVzLjA4LS4wMy4xMy0uMDVjLjA4LDAsLjE3LS4wNS4yNS0uMDUuMDUsMCwuMTMsMCwuMi0uMDNoMS4xNnMuMTMsMCwuMi4wM2MuMDUsMCwuMTIsMCwuMi4wNWguMDhzLjA4LDAsLjEyLjAzYy4wNSwwLC4xMi4wMy4xNy4wNWguMDVzLjEyLjA1LjE3LjA4Yy4yNS4xMi41LjI1LjcxLjQxLjA1LjAzLjA4LjA4LjEzLjEyLjA1LjA1LjEyLjA4LjE3LjEzcy4xMi4wOC4xMy4xM2MuMDUuMDUuMDguMTIuMTMuMTcsMCwwLC4wMy4wMy4wNS4wNWwxMi4yLDE0LjIzYzEuMzUsMS41NywxLjE2LDMuOTMtLjQxLDUuMjVoMGwtLjAzLjAzdi4wMloiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy03IiBkPSJNMzA1LjA2LDIwOC42aDBzLS4wNS4wNS0uMTIuMDhsLjA4LS4wOGguMDNaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTMwNS4zOSwyMDguMzFzLS4wMy4wMy0uMDUuMDVjMCwwLC4wMy0uMDMuMDUtLjA1WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik0zMDUuMzIsMjA4LjMybC0uMjUuMjUuMjUtLjI1WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik0zMDUuNjUsMjA4LjA2cy0uMi4xNy0uMy4yNWMuMDMtLjAzLjA1LS4wNS4wOC0uMDguMDUtLjA1LjEzLS4xMi4yLS4xN2guMDMtLjAyWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik0zMDYuMDIsMjA3LjgxYy4xNy0uMTIuMzYtLjIuNTMtLjI1LS4yLjA4LS4zNi4xNy0uNTMuMjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTMxMC4zMiwyMDguMTlsLjEyLjEycy0uMTItLjA4LS4xNy0uMTNsLjAzLjAzaC4wM2wtLjAyLS4wMloiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik0zNDcuMDgsMjI3LjY3di0yNi41M2g0Ljc5bC4xMyw2LjE2aC0uMzhjLjM2LTEuNTIuOTQtMi43NCwxLjY4LTMuNzEuNzgtLjk2LDEuNjUtMS42OCwyLjY2LTIuMTgsMS4wMS0uNSwyLjEtLjcxLDMuMTktLjcxLDEuODcsMCwzLjM1LjYxLDQuNTEsMS43OHMxLjksMi44NiwyLjMxLDVoLS42M2MuMzMtMS40NS45MS0yLjY5LDEuNzMtMy43MXMxLjgyLTEuNzgsMi45Ny0yLjMxLDIuNDMtLjc5LDMuNzMtLjc5YzEuNTIsMCwyLjg2LjMzLDQuMDksMS4wMiwxLjI0LjY5LDIuMiwxLjcsMi45MSwzLjA1czEuMDcsMy4wMiwxLjA3LDUuMDR2MTcuOWgtNS4wNHYtMTcuMzdjMC0xLjc3LS40Ni0zLjA1LTEuNDQtMy44NS0uOTYtLjc5LTIuMDYtMS4xOS0zLjM4LTEuMTktMS4wNCwwLTEuOTUuMjEtMi43Mi42OXMtMS4zNSwxLjExLTEuNzcsMS45Yy0uNDEuODMtLjYxLDEuNzctLjYxLDIuODF2MTYuOTloLTQuOTV2LTE3LjdjMC0xLjQ0LS40NS0yLjU2LTEuMzItMy40LS44OC0uODYtMS45OC0xLjI5LTMuMzUtMS4yOS0uOTQsMC0xLjc4LjIxLTIuNTguNjktLjc5LjQ1LTEuNDQsMS4xMi0xLjkzLDIuMDFzLS43MSwxLjk1LS43MSwzLjI0djE2LjQ5aC01LjA0LjAzbC4wMy0uMDNaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTM5NC42MSwyMjguMjhjLTEuNjIsMC0zLjA3LS4zLTQuMzgtLjk0LTEuMy0uNjQtMi4zNC0xLjU0LTMuMS0yLjc0cy0xLjE2LTIuNjYtMS4xNi00LjQyYzAtMS41Mi4yOC0yLjc0LjgzLTMuNzEuNTQtLjk2LDEuMzItMS43MywyLjI2LTIuMzEuOTYtLjU4LDIuMDEtLjk5LDMuMTUtMS4yOXMyLjM0LS41LDMuNTUtLjYzYzEuNTItLjIsMi43Mi0uMzMsMy42OC0uNDZzMS42NS0uMzMsMi4xLS42MS42Ni0uNzEuNjYtMS4zNXYtLjEzYzAtLjk5LS4yLTEuODUtLjU0LTIuNTNzLS45MS0xLjIxLTEuNjItMS41Ny0xLjYyLS41NC0yLjY5LS41NC0yLjA2LjE3LTIuODYuNTMtMS40NS43OS0xLjk1LDEuMzdjLS41LjU0LS44NiwxLjEyLTEuMTEsMS43M2wtNC43Mi0xLjI5Yy41OC0xLjYsMS40LTIuODYsMi40OC0zLjgxczIuMzEtMS42OCwzLjcxLTIuMTEsMi44Ni0uNjYsNC4zNC0uNjZjMS4wNCwwLDIuMTEuMTMsMy4zLjM4LDEuMTYuMjUsMi4yNi43MSwzLjI3LDEuMzdzMS44NSwxLjYsMi40OCwyLjgxLjk2LDIuNzcuOTYsNC43MXYxNy42MmgtNC44N3YtMy42M2gtLjI1Yy0uMzMuNjktLjgzLDEuMzUtMS40OSwyLjAxcy0xLjQ5LDEuMTktMi40OCwxLjYtMi4yLjYzLTMuNTcuNjNsLjAzLjAzLS4wMy0uMDNaTTM5NS43MywyMjQuMDdjMS4zNywwLDIuNTMtLjI4LDMuNTItLjgzLjk2LS41NCwxLjczLTEuMjksMi4yMy0yLjIuNTMtLjkxLjc4LTEuOS43OC0yLjkxdi0zLjM4Yy0uMi4yLS41My4zNi0xLjA0LjUzcy0xLjExLjI4LTEuNzcuNDFjLS42Ni4xMi0xLjI5LjIxLTEuOS4zcy0xLjExLjEzLTEuNTIuMmMtLjk0LjEzLTEuODIuMzMtMi41OC42M3MtMS40LjcxLTEuODcsMS4yOWMtLjQ2LjU0LS42OSwxLjI5LS42OSwyLjIsMCwuODMuMjEsMS41NC42MywyLjExcy45OS45OSwxLjcsMS4yOWMuNzEuMjgsMS41NC40NSwyLjQ4LjQ1bC4wMy0uMDhaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTQyMy42NywyMDEuMTZ2NC4yM2gtMTMuODJ2LTQuMjNoMTMuODJaTTQxMy41NCwxOTQuODNoNS4wNHYyNS42N2MwLDEuMDcuMjEsMS44NS42NiwyLjM0czEuMTYuNzQsMi4xNS43NGMuMjUsMCwuNjEtLjAzLDEuMDItLjA4cy43OS0uMTMsMS4xMS0uMmwuODgsNC4xOGMtLjUzLjItMS4xMS4zMy0xLjcuNDFzLTEuMjEuMTMtMS44Mi4xM2MtMi4zMSwwLTQuMDktLjYzLTUuMzgtMS44N3MtMS45My0yLjk5LTEuOTMtNS4yMnYtMjYuMTJoLS4wMloiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy03IiBkPSJNNDI5Ljk2LDE5Ny4wOGMtLjg4LDAtMS42Mi0uMy0yLjIzLS45MXMtLjk0LTEuMzUtLjk0LTIuMTguMy0xLjYuOTQtMi4yYy42MS0uNjEsMS4zNS0uOTEsMi4yMy0uOTFzMS42Mi4zLDIuMjMuOTEuOTQsMS4zNS45NCwyLjItLjMsMS42LS45NCwyLjE4LTEuMzcuOTEtMi4yMy45MVpNNDI3LjQzLDIyNy42N3YtMjYuNTNoNS4wNHYyNi41M2gtNS4wNFoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy03IiBkPSJNNDQzLjExLDE5Mi4zMnYzNS4zNWgtNS4wNHYtMzUuMzVoNS4wNFoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy03IiBkPSJNNDUzLjc4LDE5Mi4zMnYzNS4zNWgtNS4wNHYtMzUuMzVoNS4wNFoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy03IiBkPSJNNDYxLjkyLDE5Ny4wOGMtLjg4LDAtMS42Mi0uMy0yLjIzLS45MXMtLjk0LTEuMzUtLjk0LTIuMTguMy0xLjYuOTQtMi4yYy42MS0uNjEsMS4zNS0uOTEsMi4yMy0uOTFzMS42Mi4zLDIuMjMuOTEuOTQsMS4zNS45NCwyLjItLjMsMS42LS45NCwyLjE4LTEuMzcuOTEtMi4yMy45MVpNNDU5LjM5LDIyNy42N3YtMjYuNTNoNS4wNHYyNi41M2gtNS4wNFoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy03IiBkPSJNNDgwLjYxLDIyOC4yM2MtMi4zOSwwLTQuNDctLjU4LTYuMjctMS43LTEuNzgtMS4xNi0zLjE5LTIuNzQtNC4xOC00Ljc5LS45OS0yLjA1LTEuNDktNC40Ni0xLjQ5LTcuMThzLjUtNS4xNywxLjQ5LTcuMjNjLjk5LTIuMDYsMi4zNi0zLjY1LDQuMTgtNC44LDEuNzgtMS4xNiwzLjg4LTEuNyw2LjI3LTEuN3M0LjUxLjU4LDYuMjksMS43YzEuNzgsMS4xMiwzLjE5LDIuNzQsNC4xOCw0LjhzMS40OSw0LjQ3LDEuNDksNy4yMy0uNSw1LjEyLTEuNDksNy4xOGMtLjk5LDIuMDYtMi4zOSwzLjY1LTQuMTgsNC43OS0xLjc4LDEuMTQtMy44OCwxLjctNi4yOSwxLjdaTTQ4MC42MSwyMjMuODJjMS41NCwwLDIuODItLjQxLDMuODUtMS4yN3MxLjc3LTEuOTgsMi4yNi0zLjM4Ljc0LTIuOTQuNzQtNC42Mi0uMjUtMy4yNC0uNzQtNC42Ny0xLjI0LTIuNTYtMi4yNi0zLjRjLTEuMDItLjg2LTIuMjgtMS4yNy0zLjg1LTEuMjdzLTIuODEuNDEtMy44MSwxLjI3Yy0xLjAyLjg2LTEuNzcsMS45OC0yLjI2LDMuMzhzLS43NCwyLjk3LS43NCw0LjY3LjI1LDMuMjIuNzQsNC42MiwxLjI0LDIuNTMsMi4yNiwzLjM4YzEuMDIuODYsMi4yOCwxLjI3LDMuODEsMS4yN3YuMDMtLjAyWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik01MDEuOTQsMjExLjk5djE1LjcyaC01LjA0di0yNi41M2g0Ljc5bC4wNSw2LjUyaC0uNTNjLjc0LTIuMzYsMS44Mi00LjA5LDMuMjQtNS4yczMuMTQtMS42NSw1LjEzLTEuNjVjMS43MywwLDMuMjQuMzgsNC41NCwxLjEyLDEuMjkuNzgsMi4zMSwxLjg3LDMuMDIsMy4zNS43NCwxLjQ5LDEuMTEsMy4zMiwxLjExLDUuNTN2MTYuODZoLTUuMDR2LTE2LjIxYzAtMS45My0uNDYtMy40LTEuNDQtNC40Ny0uOTYtMS4wNy0yLjI4LTEuNjItMy45Ni0xLjYyLTEuMTIsMC0yLjE1LjI1LTMuMDIuNzgtLjkxLjUzLTEuNiwxLjI3LTIuMTEsMi4yNnMtLjc4LDIuMTgtLjc4LDMuNTdoMGwuMDMtLjAyWiIvPgogICAgPC9nPgogIDwvZz4KICA8ZyBpZD0iTGF5ZXJfMS0yIiBkYXRhLW5hbWU9IkxheWVyIDEiPgogICAgPGcgaWQ9InV1aWQtMmI1YWFlNGItM2EzYy00NDYwLWFiOTAtMTQ2ZTdlMWE4NjExIiBkYXRhLW5hbWU9IkxheWVyIDEtMiI+CiAgICAgIDxnPgogICAgICAgIDxnPgogICAgICAgICAgPGc+CiAgICAgICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNiIgZD0iTTEzMS41MywxMy4xOWwtMS41LDIuNDVjLS44NCwxLjM4LS4zOSwzLjE3LDEuMDEsMy45OGwyLjI1LDEuMjljMS4zNS43OCwzLjA3LjM0LDMuODctLjk4bDEuNDctMi40LDMuNzguMDljLjkzLjAyLDEuNzgtLjQ1LDIuMjYtMS4yM2wzLjcxLTYuMDVjLjQ4LS43OC41MS0xLjc3LjA3LTIuNTdsLTMuMzktNi4yNWMtLjQzLS44MS0xLjI4LTEuMzMtMi4xOS0xLjM1TDEzNS43NiwwYy0uOTMtLjAyLTEuNzguNDUtMi4yNiwxLjIzbC0zLjcxLDYuMDVjLS40OC43OC0uNTEsMS43Ny0uMDcsMi41N2wxLjgsMy4zMmguMDFzLS4wMS4wMS0uMDEuMDFaIi8+CiAgICAgICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTI3Ljg0LDE2LjU0Yy40OC43OCwxLjM0LDEuMjUsMi4yNiwxLjIzbDMuNzgtLjA5LDEuNDEsMi4zYy44MiwxLjMzLDIuNTQsMS43NywzLjg3Ljk4bDIuMjUtMS4yOWMxLjQtLjgxLDEuODUtMi42MSwxLjAxLTMuOThsLTEuNDUtMi4zNiwxLjgtMy4zMmMuNDMtLjgxLjQxLTEuNzktLjA3LTIuNTdsLTMuNzEtNi4wNWMtLjQ4LS43OC0xLjM0LTEuMjUtMi4yNi0xLjIzbC03LjA5LjE5Yy0uOTMuMDItMS43NS41My0yLjE5LDEuMzVsLTMuMzksNi4yNWMtLjQzLjgxLS40MSwxLjc5LjA3LDIuNTdsMy43MSw2LjA1di0uMDJoMFoiLz4KICAgICAgICAgIDwvZz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTEzMC41OCwxMjUuNTJsLTEuMDMtMi43Yy00LjgxLDE0Ljg1LTE2LjQ5LDI2LjUzLTMxLjM0LDMxLjM0LDE0Ljg1LDQuOCwyNi41OCwxNi41OCwzMS4zNCwzMS4zNCw0Ljc1LTE0Ljc1LDE2LjU2LTI2LjU5LDMxLjM0LTMxLjM0LTEzLjg0LTQuNTYtMjUuMTgtMTQuOTUtMzAuMzMtMjguNjVoLjAxczAsMCwwLDBaIi8+CiAgICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik01MC40NSw3NC4zMWgwYzQuOTgsMCw5LjAxLDQuMDQsOS4wMSw5LjAydjEzLjY1YzAsNC45OC00LjA0LDkuMDItOS4wMSw5LjAyaDBjLTQuOTgsMC05LjAxLTQuMDQtOS4wMS05LjAydi0xMy42NWMwLTQuOTgsNC4wNC05LjAyLDkuMDEtOS4wMloiLz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTgyLjc4LDc0LjMxaDBjNC45OCwwLDkuMDEsNC4wNCw5LjAxLDkuMDJ2MTMuNjVjMCw0Ljk4LTQuMDQsOS4wMi05LjAxLDkuMDJoMGMtNC45OCwwLTkuMDEtNC4wNC05LjAxLTkuMDJ2LTEzLjY1YzAtNC45OCw0LjA0LTkuMDIsOS4wMS05LjAyWiIvPgogICAgICAgICAgPHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTU1LjQyLDQ0Ljc5bC01MS45LTI5Ljk3Yy0xMC42Mi02LjEyLTIzLjc5LTYuMTItMzQuNDEsMGwtNTEuOSwyOS45N0M2LjU5LDUwLjkyLDAsNjIuMzMsMCw3NC41OXY1OS45NGMwLDEyLjI1LDYuNTksMjMuNjcsMTcuMjEsMjkuOGw1MS45LDI5Ljk3YzUuMzEsMy4wNiwxMS4yNiw0LjYsMTcuMjEsNC42czExLjg5LTEuNTMsMTcuMjEtNC42bDkuMjYtNS4zNHMtLjAyLS4wMS0uMDQtLjAyYzMuNzktMi41LDUuMDMtNy41NSwyLjc0LTExLjUzbC0uOTMtMS41OWgwYy0zLjM3LTQuOTEtOC4wNC04LjgzLTEzLjUzLTExLjI5LTQuMzYtMS45NS05LjQtMS42Ny0xMy41My43MWgwYy01LjQ4LDMuMTctMTIuMjUsMy4xNy0xNy43NCwwbC00Mi4zNS0yNC40NmMtNS40OC0zLjE3LTguODYtOS4wMy04Ljg2LTE1LjM2di00OC45YzAtNi4zNCwzLjM4LTEyLjE5LDguODYtMTUuMzZsNDIuMzUtMjQuNDRjNS40OC0zLjE3LDEyLjI1LTMuMTcsMTcuNzQsMGw0Mi4zNSwyNC40NGM1LjQ4LDMuMTcsOC44Niw5LjAzLDguODYsMTUuMzZ2MzkuNGMwLDE1LjYyLDEyLjc3LDI4LjM5LDI4LjM5LDI4LjM5aC42NGMyLjcsMCw0LjkxLTIuMSw0LjkxLTQuNjZoMHYtNjUuMDZjMC0xMi4yNS02LjU5LTIzLjY3LTE3LjIxLTI5LjhoMFoiLz4KICAgICAgICA8L2c+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy04IiBkPSJNMjcxLjc2LDExMi42Yy0uNjgsMS45My0xLjQ3LDQuNDItMi4zNSw3LjQ3cy0xLjc5LDYuMy0yLjcyLDkuNzVjLS45MywzLjQ2LTEuODEsNi44NS0yLjY1LDEwLjE4LS4xNC41Ny0uMjcsMS4xMS0uNDEsMS42My0uMTYtLjYzLS4zMS0xLjI1LS40Ny0xLjkxLS44My0zLjM1LTEuNy02Ljc1LTIuNjUtMTAuMjItLjkzLTMuNDYtMS44My02LjY2LTIuNjgtOS42MXMtMS42My01LjM4LTIuMzEtNy4zMmwtMjMuODMtNjUuMTdoLTI0LjY0djExMy41OGgxNi4yN3YtNjEuMTNjMC0yLjQ5LS4wNC01LjQtLjExLTguNzNzLS4xNC02Ljg1LS4yMy0xMC41NmMtLjA3LTMuNzEtLjE0LTcuMzgtLjIzLTExLjAyLS4wNC0xLjYzLS4wNy0zLjE3LS4xMS00LjY5LjYzLDIuMTIsMS4yNyw0LjI0LDEuOSw2LjM2LDEuMTgsMy45NCwyLjMyLDcuNzMsMy40NSwxMS4zNSwxLjEzLDMuNjQsMi4xNyw2LjkzLDMuMTIsOS45Ljk1LDIuOTcsMS44LDUuNDMsMi41Miw3LjM2bDIyLjY1LDYxLjEzaDE0LjI5bDIyLjM2LTYxLjEzYy42OC0xLjk4LDEuNTMtNC40OCwyLjUyLTcuNTIsMS0zLjAyLDIuMDUtNi4zNiwzLjE1LTEwLjAzLDEuMTEtMy42NiwyLjIyLTcuNDUsMy4zOC0xMS40LjY1LTIuMjQsMS4yNy00LjQyLDEuODYtNi41OS0uMDQsMS44OC0uMDcsMy44MS0uMTEsNS43OC0uMDcsMy43MS0uMTQsNy4zOC0uMjMsMTEuMDItLjA3LDMuNjQtLjEzLDcuMDctLjE4LDEwLjMzLS4wNSwzLjI0LS4wNyw2LjA1LS4wNyw4LjM5djYxLjEzaDE2LjYzVjQ3LjQzaC0yNC43OGwtMjMuNDYsNjUuMTdoLjA2cy4wMSwwLC4wMSwwWk0zOTEuNjIsODAuMzVjLTMuMjctMi4xMy02Ljc3LTMuNi0xMC40OS00LjQyLTMuNzItLjgyLTcuMjMtMS4yMi0xMC41Ni0xLjIyLTQuNzgsMC05LjQzLjcxLTEzLjkzLDIuMTNzLTguNDksMy42OS0xMS45NCw2Ljc5Yy0zLjQ3LDMuMS02LjE0LDcuMTktNy45OSwxMi4yOGwxNS4xOCw0LjExYy43OC0xLjkzLDEuOTctMy43OCwzLjU2LTUuNTcsMS41OS0xLjc4LDMuNjYtMy4yNCw2LjIzLTQuMzksMi41Ny0xLjE1LDUuNjMtMS43Miw5LjItMS43MnM2LjM2LjU5LDguNjgsMS43OWMyLjMyLDEuMiw0LjA2LDIuODgsNS4yNCw1LjA3LDEuMTgsMi4xOCwxLjc3LDQuODgsMS43Nyw4LjA4di40NmMwLDEuOTgtLjcyLDMuNDItMi4xNyw0LjMtMS40NS44OS0zLjY3LDEuNTMtNi43MSwxLjkxLTMuMDMuMzgtNi45Ny44OC0xMS44LDEuNDgtMy44Ni40Ni03LjY3LDEuMTUtMTEuNCwyLjA2LTMuNzQuOTEtNy4xMywyLjI5LTEwLjE5LDQuMTEtMy4wNiwxLjgzLTUuNDgsNC4yOS03LjI1LDcuMzktMS43OSwzLjEtMi42OCw3LjA2LTIuNjgsMTEuODksMCw1LjU5LDEuMjIsMTAuMzIsMy42NiwxNC4xOCwyLjQ0LDMuODYsNS43Nyw2LjgsOS45Nyw4LjgxLDQuMjEsMiw4LjksMy4wMSwxNC4wOCwzLjAxLDQuNDQsMCw4LjI3LS42OCwxMS40Ny0yLjAyLDMuMi0xLjM1LDUuODUtMy4wNiw3Ljk1LTUuMTQsMi4xLTIuMDgsMy42OS00LjIyLDQuNzYtNi40aC44MXYxMS42NmgxNS42MnYtNTYuNTZjMC02LjItMS4wMy0xMS4yMy0zLjA4LTE1LjA5LTIuMDUtMy44Ni00LjcxLTYuODYtNy45OS04Ljk5aC4wMXMtLjAxLDAtLjAxLDBaTTM4Ni42MywxMzAuMjljMCwzLjMxLS44Myw2LjQzLTIuNDksOS4zOC0xLjY2LDIuOTUtNC4wNSw1LjMxLTcuMTgsNy4wOXMtNi44OSwyLjY3LTExLjI5LDIuNjdjLTMuMDMsMC01LjctLjQ2LTcuOTktMS4zOC0yLjMtLjkxLTQuMTItMi4yOS01LjQ2LTQuMTEtMS4zNS0xLjgzLTIuMDItNC4wOS0yLjAyLTYuNzgsMC0yLjk1Ljc1LTUuMzEsMi4yNC03LjA5czMuNDktMy4xNSw2LjAxLTQuMTFjMi41MS0uOTYsNS4yOC0xLjY1LDguMzItMi4wNiwxLjI3LS4xNiwyLjg4LS4zNiw0LjgzLS42MSwxLjk1LS4yNSwzLjk4LS41Nyw2LjA5LS45NSwyLjEtLjM4LDMuOTctLjgyLDUuNi0xLjI5LDEuNjMtLjQ4LDIuNzUtMS4wMywzLjMzLTEuNjN2MTAuOWgwczAtLjAxLDAtLjAxWk00MjAuNjQsMTYxaDE2LjEzdi04NS4yMmgtMTYuMTN2ODUuMjJaTTQyOC43Nyw0Mi44NmMtMi43OSwwLTUuMTcuOTYtNy4xNCwyLjg5LTEuOTgsMS45My0yLjk3LDQuMjktMi45Nyw3LjA5czEsNS4wMywyLjk3LDYuOThjMS45OCwxLjk1LDQuMzYsMi45NCw3LjE0LDIuOTRzNS4xOC0uOTYsNy4xOC0yLjg5YzItMS45MywzLjAxLTQuMjYsMy4wMS03LjAycy0xLjAxLTUuMTYtMy4wMS03LjA5Yy0yLTEuOTMtNC40LTIuODktNy4xOC0yLjg5aDBaTTUxNS4yLDg5LjM0Yy0yLjA1LTMuODYtNC43MS02Ljg2LTcuOTktOC45OS0zLjI3LTIuMTMtNi43Ny0zLjYtMTAuNDktNC40Mi0zLjcyLS44Mi03LjI0LTEuMjItMTAuNTYtMS4yMi00Ljc4LDAtOS40My43MS0xMy45MywyLjEzcy04LjQ5LDMuNjktMTEuOTQsNi43OWMtMy40NywzLjEtNi4xNCw3LjE5LTcuOTksMTIuMjhsMTUuMTgsNC4xMWMuNzgtMS45MywxLjk3LTMuNzgsMy41Ni01LjU3LDEuNTktMS43OCwzLjY2LTMuMjQsNi4yMy00LjM5LDIuNTctMS4xNSw1LjYzLTEuNzIsOS4yLTEuNzJzNi4zNi41OSw4LjY4LDEuNzljMi4zMiwxLjIsNC4wNiwyLjg4LDUuMjQsNS4wNywxLjE4LDIuMTgsMS43NSw0Ljg4LDEuNzUsOC4wOHYuNDZjMCwxLjk4LS43MiwzLjQyLTIuMTcsNC4zLTEuNDUuODktMy42NywxLjUzLTYuNzEsMS45MS0zLjAzLjM4LTYuOTcuODgtMTEuOCwxLjQ4LTMuODYuNDYtNy42NywxLjE1LTExLjQsMi4wNi0zLjc0LjkxLTcuMTMsMi4yOS0xMC4xOSw0LjExLTMuMDYsMS44My01LjQ4LDQuMjktNy4yNSw3LjM5LTEuNzksMy4xLTIuNjgsNy4wNi0yLjY4LDExLjg5LDAsNS41OSwxLjIyLDEwLjMyLDMuNjYsMTQuMTgsMi40NCwzLjg2LDUuNzcsNi44LDkuOTcsOC44MSw0LjIxLDIsOC45LDMuMDEsMTQuMDgsMy4wMSw0LjQ0LDAsOC4yNy0uNjgsMTEuNDctMi4wMiwzLjItMS4zNSw1Ljg1LTMuMDYsNy45NS01LjE0LDIuMS0yLjA4LDMuNjktNC4yMiw0Ljc2LTYuNGguODF2MTEuNjZoMTUuNjJ2LTU2LjU2YzAtNi4yLTEuMDMtMTEuMjMtMy4wOC0xNS4wOWguMDJzMCwwLDAsMFpNNTAyLjIxLDEzMC4yOWMwLDMuMzEtLjgzLDYuNDMtMi40OSw5LjM4LTEuNjYsMi45NS00LjA1LDUuMzEtNy4xOCw3LjA5cy02Ljg5LDIuNjctMTEuMjksMi42N2MtMy4wMywwLTUuNy0uNDYtNy45OS0xLjM4LTIuMy0uOTEtNC4xMi0yLjI5LTUuNDYtNC4xMS0xLjM1LTEuODMtMi4wMi00LjA5LTIuMDItNi43OCwwLTIuOTUuNzUtNS4zMSwyLjI0LTcuMDlzMy40OS0zLjE1LDYuMDEtNC4xMWMyLjUxLS45Niw1LjI4LTEuNjUsOC4zMi0yLjA2LDEuMjctLjE2LDIuODgtLjM2LDQuODMtLjYxLDEuOTUtLjI1LDMuOTgtLjU3LDYuMDktLjk1LDIuMS0uMzgsMy45Ny0uODIsNS42LTEuMjksMS42My0uNDgsMi43NS0xLjAzLDMuMzMtMS42M3YxMC45aDBzMC0uMDEsMC0uMDFaIi8+CiAgICAgIDwvZz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==">
+    <p class="eyebrow">Demo report · Internal</p>
+    <h1>MLS Listings: Custom Connector, Medallion Load
+      <strong>and Schema Drift Recovery</strong></h1>
+    <p class="lede">Replace Fivetran for a RESO-style MLS feed. Maia builds a custom connector from API docs, generates the bronze → silver pipelines, then detects and fixes schema drift, with a person approving the change.</p>
+    <dl class="meta">
+      <div><dt>Audience</dt><dd>Ted Manasa (Sr Mgr Data Platform) · Santosh Payal (Sr Director, Data)</dd></div>
+      <div><dt>Snowflake</dt><dd><code>MTLN_SANDBOX.MAIA_GARNIE_BOLLING_1</code></dd></div>
+      <div><dt>Branch</dt><dd><code>garnie_bolling/realtor-20261105</code></dd></div>
+      <div><dt>Environment</dt><dd><code>demo-garnie-bolling</code></dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#approach">Approach</a>
+  <a href="#source">1 · The source API</a>
+  <a href="#connector">2 · Build the connector</a>
+  <a href="#pipelines">3 · Pipelines</a>
+  <a href="#drift">4 · Schema drift</a>
+  <a href="#fix">5 · Fix with Maia</a>
+  <a href="#errors">6 · Where to find the error</a>
+  <a href="#reset">7 · Reset</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="approach">
+  <h2>The approach in one page</h2>
+  <p class="sub">What the demo shows, in the order it happens.</p>
+  <div class="flow" aria-label="Demo flow">
+    <span class="step">Custom API (v1)</span><span class="arrow">→</span>
+    <span class="step">Maia builds connector</span><span class="arrow">→</span>
+    <span class="step">Raw (bronze)</span><span class="arrow">→</span>
+    <span class="step">Silver + rejects</span><span class="arrow">→</span>
+    <span class="step">Source renames a field (v2)</span><span class="arrow">→</span>
+    <span class="step fail">Assert fails</span><span class="arrow">→</span>
+    <span class="step">Troubleshoot with Maia</span><span class="arrow">→</span>
+    <span class="step">Fix with Maia → reviewed diff</span><span class="arrow">→</span>
+    <span class="step">Green run</span>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="stat">5,050</div><div class="statcap">listing records across 11 pages (500 per page)</div></div>
+    <div class="card"><div class="stat">4,661</div><div class="statcap">rows in silver after the v1 baseline run</div></div>
+    <div class="card"><div class="stat">389</div><div class="statcap">rejected rows, each with a stated reason</div></div>
+    <div class="card"><div class="stat">~3 min</div><div class="statcap">live fix segment in the demo</div></div>
+  </div>
+  <div class="callout honest"><strong class="t">Honest positioning</strong>
+    Custom connectors do <strong>not</strong> heal themselves when the source changes. Here, Matillion detects the drift through an explicit data quality rule and assert, explains it, and Maia proposes the fix. A person reviews, commits and publishes. Compare that with silent, unpredictable behaviour in Fivetran.
+  </div>
+</section>
+
+<section id="source">
+  <h2><span class="n">1</span>The source: a fake RESO-style MLS API</h2>
+  <p class="sub">Hosted on GitHub Pages so the connector has a real, reachable API to read.</p>
+  <h3>1.1 Source details</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Item</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Repo</td><td><code>github.com/garniebolling-maia/realtor-dot-com</code></td></tr>
+      <tr><td>Docs page (Maia reads this)</td><td><code>https://garniebolling-maia.github.io/realtor-dot-com/index.html</code></td></tr>
+      <tr><td>Spec (upload option)</td><td><code>openapi.yaml</code> (OpenAPI 3.0, under 5 MB)</td></tr>
+      <tr><td>Endpoint</td><td><code>GET /v1/listings/page-{n}.json</code> (11 pages × 500 = 5,050 records)</td></tr>
+      <tr><td>Auth</td><td>None (the connector also supports API Key, Basic, Bearer and OAuth for real MLS feeds)</td></tr>
+      <tr><td>Paging</td><td>Full-URL next link (<code>nextLink</code>, plus <code>@odata.nextLink</code> for the RESO look); the last page has none</td></tr>
+      <tr><td>Payload</td><td><code>{ "@odata.count", "page", "value": [ listings... ], "nextLink" }</code> with nested <code>Address{}</code> and <code>ListAgent{}</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Repo files</h3>
+<pre><code>index.html            API docs page
+openapi.yaml          OpenAPI spec
+generate_pages.py     Builds the JSON pages (--version 1|2, fixed seed)
+swap.sh               ./swap.sh v1 | v2: switches the live payload, commits and pushes
+snapshots/v1/*.json   Baseline payload
+snapshots/v2/*.json   Drifted payload
+v1/listings/*.json    LIVE payload (what the connector calls)</code></pre>
+
+  <h3>Planted data quality issues <span class="statcap">(about 8%, same as the rest of the demo)</span></h3>
+  <div class="cards">
+    <div class="card"><div class="stat">150</div><div class="statcap">null prices</div></div>
+    <div class="card"><div class="stat">40</div><div class="statcap">negative prices</div></div>
+    <div class="card"><div class="stat">100</div><div class="statcap">orphan properties (<code>PROP_ORPHAN_99999</code>)</div></div>
+    <div class="card"><div class="stat">49</div><div class="statcap">future <code>ModificationTimestamp</code> values</div></div>
+    <div class="card"><div class="stat">50</div><div class="statcap">duplicate <code>ListingId</code>s</div></div>
+  </div>
+</section>
+
+<section id="connector">
+  <h2><span class="n">2</span>Building the connector with Maia</h2>
+  <ol class="steps">
+    <li><strong>Custom connectors → Create with Maia</strong>, then paste the docs URL or upload <code>openapi.yaml</code>.</li>
+    <li>Use this prompt:
+<pre><code>Build a custom connector named REA MLS Listings for this API. No authentication. Import the listings endpoint starting at page 1, paginate by following the next link (absolute URL) until it is absent. Records are in `value`.</code></pre></li>
+    <li>Resulting connector: <strong>REA MLS Listings API</strong>, endpoint <strong>List Listings</strong> <span class="tag ok">Published</span></li>
+    <li>Pagination tab settings:
+      <div class="tw"><table>
+        <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Method</td><td>Full Path</td></tr>
+          <tr><td>Next page URI property</td><td><code>nextLink</code></td></tr>
+          <tr><td>Page size</td><td>500</td></tr>
+          <tr><td>Page size parameter</td><td><code>pageSize</code> (required by the editor; GitHub Pages ignores it)</td></tr>
+        </tbody>
+      </table></div></li>
+  </ol>
+  <div class="callout lesson"><strong class="t">Lesson learned</strong>
+    <code>@odata.nextLink</code> only loaded page 1, probably because the connector treats the <code>.</code> as a JSON path separator. Adding a plain <code>nextLink</code> key fixed it: 11 pages and 5,050 records.
+  </div>
+</section>
+
+<section id="pipelines">
+  <h2><span class="n">3</span>Pipelines: API → raw (bronze) → silver</h2>
+
+  <h3>3.1 Orchestration: <code>NEW_Load MLS Listings.orch.yaml</code></h3>
+  <div class="flow">
+    <span class="step">Start</span><span class="arrow">→</span>
+    <span class="step">Extract MLS Listings</span><span class="arrow">→</span>
+    <span class="step">Build MLS Silver</span><span class="arrow">→</span>
+    <span class="step">Assert Silver Row Count</span>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Component</th><th>Type</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Extract MLS Listings</td><td>Custom connector (REA MLS Listings API / List Listings)</td><td>Calls the API, follows <code>nextLink</code> through all 11 pages, writes <code>REA_MLS_LISTINGS_RAW</code> (Replace). Each page lands as one row in a VARIANT column <code>DATA_VALUE</code>.</td></tr>
+      <tr><td>Build MLS Silver</td><td>Run Transformation</td><td>Runs <code>NEW_MLS Listings Silver.tran.yaml</code></td></tr>
+      <tr><td>Assert Silver Row Count</td><td>Assert Table</td><td>Fails the pipeline unless <code>REA_MLS_LISTINGS_SILVER</code> has <strong>4,000 rows or more</strong>. This is the <strong>drift check</strong>.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>3.2 Transformation: <code>NEW_MLS Listings Silver.tran.yaml</code></h3>
+<pre><code>MLS Raw Pages → Flatten Listings ─┐
+                    Property ─────┴→ Match Property → Dedupe Rank → DQ Rules ─┬→ Valid Listings    → Write Silver   (REA_MLS_LISTINGS_SILVER)
+                                                                              └→ Rejected Listings → Write Rejected (REA_MLS_LISTINGS_REJECTED)</code></pre>
+  <div class="tw"><table>
+    <thead><tr><th>Component</th><th>Type</th><th>Logic</th></tr></thead>
+    <tbody>
+      <tr><td>MLS Raw Pages</td><td>Table Input</td><td><code>REA_MLS_LISTINGS_RAW.DATA_VALUE</code></td></tr>
+      <tr><td>Flatten Listings</td><td>Flatten Variant</td><td>Flattens <code>value[]</code>, one row per listing, and maps the fields (including <code>Address.City</code> and <code>ListAgent.AgentId</code>). <strong><code>LivingArea</code> → <code>LIVING_SQFT</code>.</strong></td></tr>
+      <tr><td>Property</td><td>Table Input</td><td><code>REA_RE_PROPERTY.PROPERTY_ID</code></td></tr>
+      <tr><td>Match Property</td><td>Join (Left)</td><td>Adds <code>MATCHED_PROPERTY_ID</code>; NULL means an orphan</td></tr>
+      <tr><td>Dedupe Rank</td><td>Rank (Row Number)</td><td>Partition by <code>LISTING_ID</code>, order by <code>MODIFIED_AT</code> desc gives <code>RN</code></td></tr>
+      <tr><td>DQ Rules</td><td>Calculator</td><td>Sets <code>REJECTION_REASON</code>, then <code>DW_LOAD_DATE</code>, <code>DW_SOURCE</code>, <code>DW_BATCH_ID</code></td></tr>
+      <tr><td>Valid / Rejected Listings</td><td>Filter</td><td>Reason is NULL → silver; NOT NULL → rejected</td></tr>
+      <tr><td>Write Silver / Write Rejected</td><td>Rewrite Table</td><td>Idempotent CREATE OR REPLACE</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>DQ rule order <span class="statcap">(first match wins)</span></h3>
+  <ol class="steps">
+    <li><code>LIVING_SQFT IS NULL</code> → <code>SCHEMA_DRIFT_LIVING_SQFT_MISSING</code></li>
+    <li><code>RN &gt; 1</code> → <code>DUPLICATE_LISTING_ID</code></li>
+    <li><code>LIST_PRICE IS NULL</code> → <code>NULL_LIST_PRICE</code></li>
+    <li><code>LIST_PRICE &lt; 0</code> → <code>NEGATIVE_PRICE</code></li>
+    <li>No property match → <code>ORPHAN_PROPERTY_ID</code></li>
+    <li><code>MODIFIED_AT</code> in the future → <code>FUTURE_TIMESTAMP</code></li>
+  </ol>
+
+  <h3>3.3 v1 baseline results <span class="tag ok">Green run</span></h3>
+  <div class="tw"><table>
+    <thead><tr><th>Table</th><th>Rows</th></tr></thead>
+    <tbody>
+      <tr><td><code>REA_MLS_LISTINGS_RAW</code></td><td>11 (pages) holding 5,050 listings</td></tr>
+      <tr><td><code>REA_MLS_LISTINGS_SILVER</code></td><td><strong>4,661</strong></td></tr>
+      <tr><td><code>REA_MLS_LISTINGS_REJECTED</code></td><td><strong>389</strong>: NULL_LIST_PRICE 150 · ORPHAN_PROPERTY_ID 100 · DUPLICATE_LISTING_ID 50 · FUTURE_TIMESTAMP 49 · NEGATIVE_PRICE 40</td></tr>
+      <tr><td>Reconciliation</td><td>4,661 + 389 = <strong>5,050</strong> <span class="tag ok">Matches</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="drift">
+  <h2><span class="n">4</span>The schema drift scenario (v2)</h2>
+  <p class="sub">Running <code>./swap.sh v2</code> changes the payload served at the <strong>same URL</strong> the connector already calls. The connector itself is unchanged.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Change</th><th>Type</th><th>v1 field</th><th>v2 field</th></tr></thead>
+    <tbody>
+      <tr><td>Rename</td><td><span class="tag break">Breaking</span></td><td><code>LivingArea</code></td><td><code>LivingAreaSqft</code></td></tr>
+      <tr><td>New field</td><td><span class="tag add">Additive</span></td><td>none</td><td><code>VirtualTourURL</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What we expect at each table</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Table</th><th>Expected v2 behaviour</th></tr></thead>
+    <tbody>
+      <tr><td><code>REA_MLS_LISTINGS_RAW</code></td><td><strong>Loads successfully</strong>, 11 rows and 5,050 listings. The raw VARIANT column takes any JSON shape, so the extract step does <strong>not</strong> fail. The drift arrives without any error.</td></tr>
+      <tr><td>Flatten Listings (in the silver transformation)</td><td>Still maps <code>LivingArea</code>, which no longer exists, so <strong><code>LIVING_SQFT</code> is NULL for every row</strong>. <code>VirtualTourURL</code> is ignored because it isn't mapped.</td></tr>
+      <tr><td><code>REA_MLS_LISTINGS_REJECTED</code></td><td><strong>About 5,050 rows</strong>, nearly all <code>SCHEMA_DRIFT_LIVING_SQFT_MISSING</code></td></tr>
+      <tr><td><code>REA_MLS_LISTINGS_SILVER</code></td><td><strong>About 0 rows</strong></td></tr>
+      <tr><td>Assert Silver Row Count</td><td><span class="tag bad">Fails</span> (0 is below 4,000), so the pipeline status is <strong>FAILED</strong></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="fix">
+  <h2><span class="n">5</span>Fixing it with “Fix with Maia”</h2>
+  <div class="callout warn"><strong class="t">Prerequisite</strong>
+    Fix with Maia is <strong>only available for scheduled or API-triggered runs</strong>, not manual runs from the canvas. Publish the branch to the environment and run it from a <strong>schedule</strong>. Use a dedicated Fix-with-Maia branch, as with the existing Agent Ops drift demo.
+  </div>
+
+  <h3>5.1 Pre-demo prep</h3>
+  <ol class="steps">
+    <li>Get a green v1 run: commit, then <strong>checkpoint</strong> (“Post MLS v1 baseline”).</li>
+    <li>Run <code>./swap.sh v2</code>, then confirm it's live:
+<pre><code>curl -s https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-1.json | grep -o '"LivingAreaSqft"' | head -1</code></pre></li>
+    <li>Publish and <strong>schedule</strong> <code>NEW_Load MLS Listings</code> once. It should <strong>FAIL</strong> at <em>Assert Silver Row Count</em>.</li>
+    <li><strong>Checkpoint</strong> (“Pre Fix-with-Maia, MLS drift”), keeping the failure in place.</li>
+  </ol>
+
+  <h3>5.2 Live demo <span class="statcap">(about 3 minutes)</span></h3>
+  <ol class="steps">
+    <li>Open <strong>Pipeline Runs</strong>, then the failed <code>NEW_Load MLS Listings</code> run.</li>
+    <li>In the <strong>Troubleshoot with Maia</strong> card, click <strong>See more</strong>. Maia's root cause analysis should trace the failure back from the assert to the source field rename (<code>LivingArea</code> → <code>LivingAreaSqft</code>).</li>
+    <li>Click <strong>Fix with Maia</strong>, enter a new branch name (e.g. <code>fix/mls-livingarea-drift</code>), choose base branch and environment, and Designer opens.</li>
+    <li>Expected fix in <code>NEW_MLS Listings Silver.tran.yaml</code> → <strong>Flatten Listings</strong>:
+      <ul>
+        <li><code>LivingAreaSqft</code> → <code>LIVING_SQFT</code> (or <code>COALESCE</code> of both, so v1 and v2 both work)</li>
+        <li>New mapping <code>VirtualTourURL</code> → <code>VIRTUAL_TOUR_URL</code></li>
+      </ul></li>
+    <li><strong>Review the diff</strong> against the original, then commit, push and open a PR. The SOX audit trail needs business-owner approval before prod.</li>
+    <li>Rerun: silver is back to about 4,661, rejected about 389, and the assert passes <span class="tag ok">Green</span></li>
+  </ol>
+
+  <h3>Talking points</h3>
+  <div class="cards">
+    <div class="card"><h4>Root cause, not symptom</h4>Maia found the <em>originating</em> cause (a source field rename), not just the symptom (an assert failing on row count).</div>
+    <div class="card"><h4>A reviewable change</h4>The fix is a reviewable git diff, not a silent auto-change.</div>
+    <div class="card"><h4>Optional follow-up</h4>The custom connector endpoint can optionally be updated too, so its response schema documents <code>LivingAreaSqft</code>. That's a manual edit in the connector editor.</div>
+  </div>
+</section>
+
+<section id="errors">
+  <h2><span class="n">6</span>Where to find the error</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Where</th><th>What you'll see</th></tr></thead>
+    <tbody>
+      <tr><td>Pipeline Runs → failed run</td><td>Status FAILED on <code>NEW_Load MLS Listings</code>, plus the <strong>Troubleshoot with Maia</strong> card</td></tr>
+      <tr><td>Run details (per component)</td><td>Extract ✅ (11 rows) · Build MLS Silver ✅ · <strong>Assert Silver Row Count ❌</strong>, with the assertion message (row count 0, expected at least 4,000)</td></tr>
+      <tr><td>Designer → Task history → double-click run → Logging tab</td><td>Step-by-step logs and generated SQL for each component</td></tr>
+      <tr><td>Snowflake (evidence)</td><td>See the queries below</td></tr>
+    </tbody>
+  </table></div>
+<pre><code><span class="c">-- Why silver is empty</span>
+SELECT REJECTION_REASON, COUNT(*)
+FROM MTLN_SANDBOX.MAIA_GARNIE_BOLLING_1.REA_MLS_LISTINGS_REJECTED
+GROUP BY 1 ORDER BY 2 DESC;              <span class="c">-- SCHEMA_DRIFT_LIVING_SQFT_MISSING ~5,050</span>
+
+<span class="c">-- Proof the source renamed the field</span>
+SELECT f.value:"LivingArea" AS v1_field, f.value:"LivingAreaSqft" AS v2_field, f.value:"VirtualTourURL" AS new_field
+FROM MTLN_SANDBOX.MAIA_GARNIE_BOLLING_1.REA_MLS_LISTINGS_RAW r,
+     LATERAL FLATTEN(input =&gt; r.DATA_VALUE:"value") f
+LIMIT 5;                                  <span class="c">-- v1_field NULL, v2_field populated</span></code></pre>
+</section>
+
+<section id="reset">
+  <h2><span class="n">7</span>Reset</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Goal</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Demo again (keep the failure)</td><td>Restore checkpoint “Pre Fix-with-Maia, MLS drift”; leave v2 live; delete the fix branch</td></tr>
+      <tr><td>Full reset to v1</td><td><code>./swap.sh v1</code>, then restore checkpoint “Post MLS v1 baseline”</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+
+<footer><div class="wrap">Maia by Matillion · MLS schema drift demo report · Internal use. Fake data; not Realtor.com data.</div></footer>
+</body>
+</html>
