@@ -11,7 +11,9 @@ if [[ "$VER" != "v1" && "$VER" != "v2" ]]; then echo "Usage: ./swap.sh v1|v2"; e
 mkdir -p v1/listings
 rm -f v1/listings/page-*.json
 cp snapshots/"$VER"/page-*.json v1/listings/
+find . -name .DS_Store -delete
 git add -A
 git commit -m "MLS API live payload -> $VER" || echo "Nothing changed"
+git pull --rebase -X theirs origin main
 git push
 echo "Live payload now $VER. Allow ~1-5 min for GitHub Pages to update."
