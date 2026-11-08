@@ -15,7 +15,7 @@ table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:6p
 <p>A RESO Web API–style, read-only REST API that returns Multiple Listing Service (MLS) property listings as JSON. This is a demonstration API for Realtor.com data engineering.</p>
 
 <h2>Base URL</h2>
-<pre>https://YOUR_GITHUB_USER.github.io/rea-mls-api</pre>
+<pre>https://garniebolling-maia.github.io/realtor-dot-com</pre>
 
 <h2>Authentication</h2>
 <p><strong>None.</strong> This API is public and requires no API key, token or credentials.</p>
@@ -33,7 +33,7 @@ table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:6p
 <h2>Response format</h2>
 <p>Content-Type: <code>application/json</code></p>
 <pre>{
-  "@odata.context": "https://YOUR_GITHUB_USER.github.io/rea-mls-api/v1/$metadata#Property",
+  "@odata.context": "https://garniebolling-maia.github.io/realtor-dot-com/v1/$metadata#Property",
   "@odata.count": 5050,
   "page": 1,
   "pageSize": 500,
@@ -55,7 +55,7 @@ table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:6p
       "ListAgent": { "AgentId": "AGT000123", "OfficeId": "ACC00042" }
     }
   ],
-  "@odata.nextLink": "https://YOUR_GITHUB_USER.github.io/rea-mls-api/v1/listings/page-2.json"
+  "@odata.nextLink": "https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-2.json"
 }</pre>
 
 <h2>Listing fields</h2>
@@ -80,7 +80,7 @@ table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:6p
 </table>
 
 <h2>Example request</h2>
-<pre>curl https://YOUR_GITHUB_USER.github.io/rea-mls-api/v1/listings/page-1.json</pre>
+<pre>curl https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-1.json</pre>
 
 <h2>Notes</h2>
 <ul>

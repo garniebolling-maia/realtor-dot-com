@@ -1,7 +1,9 @@
 """Generate static paged JSON for the REA MLS Listings API (GitHub Pages).
 
-Usage:  python generate_pages.py --base-url https://YOUR_GITHUB_USER.github.io/rea-mls-api
-Writes: v1/listings/page-1.json ... page-N.json  (5,050 records, 500 per page)
+Usage:  python generate_pages.py --base-url https://garniebolling-maia.github.io/realtor-dot-com [--version 1|2] [--out-dir DIR]
+Writes: DIR/page-1.json ... page-N.json  (5,050 records, 500 per page). Default DIR = v1/listings
+Version 2 (schema drift): LivingArea renamed to LivingAreaSqft, new field VirtualTourURL.
+nextLink always points at the LIVE path /v1/listings/ so snapshots can be copied in place.
 Planted DQ issues (~8%): null price, negative price, orphan property, duplicates, future timestamps.
 """
 import argparse
@@ -78,13 +80,18 @@ def build_records(rng):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-url", required=True, help="e.g. https://you.github.io/rea-mls-api (no trailing slash)")
-    ap.add_argument("--out", default=".")
+    ap.add_argument("--version", type=int, choices=[1, 2], default=1)
+    ap.add_argument("--out-dir", default=os.path.join("v1", "listings"))
     args = ap.parse_args()
     base = args.base_url.rstrip("/")
 
     rng = random.Random(SEED)
     recs = build_records(rng)
-    out_dir = os.path.join(args.out, "v1", "listings")
+    if args.version == 2:
+        for r in recs:
+            r["LivingAreaSqft"] = r.pop("LivingArea")
+            r["VirtualTourURL"] = f"https://tours.example.com/{r['ListingId']}"
+    out_dir = args.out_dir
     os.makedirs(out_dir, exist_ok=True)
     pages = (len(recs) + PAGE_SIZE - 1) // PAGE_SIZE
     for p in range(1, pages + 1):
@@ -99,7 +106,7 @@ def main():
             body["@odata.nextLink"] = f"{base}/v1/listings/page-{p + 1}.json"
         with open(os.path.join(out_dir, f"page-{p}.json"), "w", encoding="utf-8") as f:
             json.dump(body, f, indent=1)
-    print(f"Wrote {pages} pages, {len(recs)} records to {out_dir}")
+    print(f"Wrote v{args.version}: {pages} pages, {len(recs)} records to {out_dir}")
 
 
 if __name__ == "__main__":
