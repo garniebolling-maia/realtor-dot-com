@@ -11005,5 +11005,6 @@
    }
   }
  ],
- "@odata.nextLink": "https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-6.json"
+ "@odata.nextLink": "https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-6.json",
+ "nextLink": "https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-6.json"
 }

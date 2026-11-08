@@ -11505,5 +11505,6 @@
    "VirtualTourURL": "https://tours.example.com/LST0003361"
   }
  ],
- "@odata.nextLink": "https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-2.json"
+ "@odata.nextLink": "https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-2.json",
+ "nextLink": "https://garniebolling-maia.github.io/realtor-dot-com/v1/listings/page-2.json"
 }

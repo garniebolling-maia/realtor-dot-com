@@ -103,7 +103,9 @@ def main():
             "value": recs[(p - 1) * PAGE_SIZE: p * PAGE_SIZE],
         }
         if p < pages:
-            body["@odata.nextLink"] = f"{base}/v1/listings/page-{p + 1}.json"
+            nxt = f"{base}/v1/listings/page-{p + 1}.json"
+            body["@odata.nextLink"] = nxt
+            body["nextLink"] = nxt   # plain key for connectors that treat '.' as a JSON path separator
         with open(os.path.join(out_dir, f"page-{p}.json"), "w", encoding="utf-8") as f:
             json.dump(body, f, indent=1)
     print(f"Wrote v{args.version}: {pages} pages, {len(recs)} records to {out_dir}")
